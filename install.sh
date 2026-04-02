@@ -40,15 +40,22 @@ curl -fsSL "$URL" -o "$TMP/$ASSET"
 echo "Extracting..."
 tar -xzf "$TMP/$ASSET" -C "$TMP"
 
-# Strip macOS quarantine (fixes Gatekeeper warning)
-if [ "$OS" = "Darwin" ]; then
-  xattr -dr com.apple.quarantine "$TMP/$BIN" 2>/dev/null || true
+# The binary inside the archive is named e.g. boltdrop-darwin-arm64 — find it
+EXTRACTED="$(find "$TMP" -maxdepth 1 -type f -name 'boltdrop-*' ! -name '*.tar.gz' | head -1)"
+if [ -z "$EXTRACTED" ]; then
+  echo "Error: could not find binary after extraction"
+  exit 1
 fi
 
-chmod +x "$TMP/$BIN"
+# Strip macOS quarantine (fixes Gatekeeper warning)
+if [ "$OS" = "Darwin" ]; then
+  xattr -dr com.apple.quarantine "$EXTRACTED" 2>/dev/null || true
+fi
 
-echo "Installing to $INSTALL_DIR..."
-sudo mv "$TMP/$BIN" "$INSTALL_DIR/$BIN"
+chmod +x "$EXTRACTED"
+
+echo "Installing to $INSTALL_DIR/$BIN..."
+sudo mv "$EXTRACTED" "$INSTALL_DIR/$BIN"
 
 rm -rf "$TMP"
 
