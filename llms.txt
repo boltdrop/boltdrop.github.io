@@ -1,0 +1,31 @@
+# BoltDrop
+
+> Free, open-source desktop app for transferring files between devices on the same local WiFi network. No internet connection required. No account. No cloud.
+
+## What is BoltDrop?
+
+BoltDrop is a cross-platform file transfer tool that runs entirely on your local network. You launch it on your Mac, Windows, or Linux machine, and any other device on the same WiFi — phone, tablet, laptop — can send or receive files by opening a URL in their browser. No app install required on the receiving end.
+
+## Key facts
+
+- **License:** Open source (free)
+- **Platforms:** macOS (Apple Silicon + Intel), Windows (x64, ARM64), Linux (x64, ARM64, ARMv7)
+- **How it works:** Starts a local HTTP server; receiving device visits the URL in any browser
+- **Privacy:** Files never leave the local network — no internet, no cloud upload
+- **Speed:** Limited only by your router; typical WiFi 6 networks reach 400+ MB/s
+- **Requirements:** No account, no pairing codes, no receiver install
+
+## Download
+
+- Latest release: https://github.com/boltdrop/boltdrop.github.io/releases/latest
+- macOS Apple Silicon: https://github.com/boltdrop/boltdrop.github.io/releases/latest/download/boltdrop-darwin-arm64.tar.gz
+- macOS Intel: https://github.com/boltdrop/boltdrop.github.io/releases/latest/download/boltdrop-darwin-amd64.tar.gz
+- Windows x64: https://github.com/boltdrop/boltdrop.github.io/releases/latest/download/boltdrop-windows-amd64.exe
+- Linux x64: https://github.com/boltdrop/boltdrop.github.io/releases/latest/download/boltdrop-linux-amd64.tar.gz
+
+## Links
+
+- Website: https://boltdrop.github.io
+- GitHub: https://github.com/boltdrop/boltdrop.github.io
+- Releases: https://github.com/boltdrop/boltdrop.github.io/releases
+- Issues: https://github.com/boltdrop/boltdrop.github.io/issues
