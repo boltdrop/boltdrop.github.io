@@ -432,6 +432,57 @@
     .pdl-btn.featured { background: var(--brand); border-color: var(--brand); color: #fff; }
     .pdl-btn.featured:hover { background: var(--brand-dark); }
 
+    /* INSTALL BLOCK */
+    .install-section {
+      max-width: 680px;
+      margin: 3rem auto 0;
+    }
+    .install-tabs {
+      display: flex;
+      gap: 0.4rem;
+      margin-bottom: -1px;
+    }
+    .itab {
+      padding: 0.45rem 1rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      border-bottom: none;
+      border-radius: 8px 8px 0 0;
+      background: var(--surface2);
+      color: var(--muted);
+      cursor: pointer;
+      user-select: none;
+    }
+    .itab.active { background: var(--surface); color: var(--text); }
+    .install-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0 8px 8px 8px;
+      overflow: hidden;
+    }
+    .install-panel { display: none; }
+    .install-panel.active { display: block; }
+    .code-block {
+      padding: 1.25rem 1.5rem;
+      font-family: "SF Mono", "Fira Code", monospace;
+      font-size: 0.83rem;
+      line-height: 1.7;
+      color: #c9d1d9;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .code-block .comment { color: #6e7681; }
+    .code-block .cmd { color: #79c0ff; }
+    .install-note {
+      padding: 0.75rem 1.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      background: var(--surface2);
+    }
+    .install-note a { color: var(--brand); text-decoration: none; }
+
     /* FOOTER */
     footer {
       padding: 2.5rem 1.5rem;
@@ -683,8 +734,57 @@
     All releases and changelogs on
     <a href="https://github.com/boltdrop/boltdrop.github.io/releases" target="_blank" style="color:var(--brand);text-decoration:none">GitHub Releases</a>
     &middot;
-    <a href="https://github.com/boltdrop/boltdrop" target="_blank" style="color:var(--muted);text-decoration:none">View source</a>
+    <a href="https://github.com/boltdrop/boltdrop.github.io" target="_blank" style="color:var(--muted);text-decoration:none">View source</a>
   </p>
+
+  <!-- Install instructions -->
+  <div class="install-section">
+    <p style="text-align:center;font-size:0.95rem;font-weight:600;margin-bottom:1.25rem;color:var(--text)">Install instructions</p>
+    <div class="install-tabs">
+      <div class="itab active" onclick="showTab('mac')">macOS</div>
+      <div class="itab" onclick="showTab('linux')">Linux</div>
+      <div class="itab" onclick="showTab('win')">Windows</div>
+    </div>
+    <div class="install-box">
+
+      <!-- macOS -->
+      <div class="install-panel active" id="tab-mac">
+        <div class="code-block"><span class="comment"># One-line install (auto-detects Apple Silicon or Intel)</span>
+<span class="cmd">curl</span> -fsSL https://boltdrop.github.io/install.sh | sh</div>
+        <div class="install-note">
+          Or download manually above — then run:<br/>
+          <code style="font-size:0.82rem">xattr -dr com.apple.quarantine boltdrop-darwin-* &amp;&amp; chmod +x boltdrop-darwin-* &amp;&amp; ./boltdrop-darwin-*</code>
+        </div>
+      </div>
+
+      <!-- Linux -->
+      <div class="install-panel" id="tab-linux">
+        <div class="code-block"><span class="comment"># One-line install (auto-detects x86_64 / arm64 / armv7)</span>
+<span class="cmd">curl</span> -fsSL https://boltdrop.github.io/install.sh | sh</div>
+        <div class="install-note">Or download the <code>.tar.gz</code> above, extract, and run <code>./boltdrop</code></div>
+      </div>
+
+      <!-- Windows -->
+      <div class="install-panel" id="tab-win">
+        <div class="code-block"><span class="comment"># Download the .exe above, then in PowerShell:</span>
+<span class="cmd">.\boltdrop-windows-amd64.exe</span></div>
+        <div class="install-note">
+          If Windows SmartScreen blocks it: click <strong>More info</strong> → <strong>Run anyway</strong>.
+          This happens because the binary is not yet code-signed.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    function showTab(name) {
+      document.querySelectorAll('.itab').forEach(function(t) { t.classList.remove('active'); });
+      document.querySelectorAll('.install-panel').forEach(function(p) { p.classList.remove('active'); });
+      event.target.classList.add('active');
+      document.getElementById('tab-' + name).classList.add('active');
+    }
+  </script>
 </section>
 
 <!-- FOOTER -->
