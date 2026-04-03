@@ -37,7 +37,7 @@ case "$OS" in
     ;;
 esac
 
-URL="https://github.com/${REPO}/releases/latest/download/${ASSET}"
+URL="https://github.com/boltdrop/${REPO}/releases/latest/download/${ASSET}"
 TMP="$(mktemp -d)"
 
 echo "Downloading BoltDrop for ${OS}/${ARCH}..."
