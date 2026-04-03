@@ -46,9 +46,9 @@ curl -fsSL "$URL" -o "$TMP/$ASSET"
 echo "Extracting..."
 tar -xzf "$TMP/$ASSET" -C "$TMP"
 
-# The binary inside the archive is named e.g. boltdrop-darwin-arm64 — find it
-EXTRACTED="$(find "$TMP" -maxdepth 1 -type f -name 'boltdrop-*' ! -name '*.tar.gz' | head -1)"
-if [ -z "$EXTRACTED" ]; then
+# The binary inside the archive is named 'boltdrop'
+EXTRACTED="$TMP/boltdrop"
+if [ ! -f "$EXTRACTED" ]; then
   echo "Error: could not find binary after extraction"
   exit 1
 fi
