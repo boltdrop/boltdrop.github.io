@@ -10,7 +10,7 @@ OS="$(uname -s)"
 ARCH="$(uname -m)"
 
 # Fetch the latest version tag
-VERSION="$(curl -fsSL "https://api.github.com/repos/boltdrop/${REPO}/releases/latest" | grep '"tag_name"' | sed 's/.*"tag_name": *"v\([^"]*\)".*/\1/')"
+VERSION="$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" | grep '"tag_name"' | sed 's/.*"tag_name": *"v\([^"]*\)".*/\1/')"
 if [ -z "$VERSION" ]; then
   echo "Error: could not determine latest version"; exit 1
 fi
@@ -37,7 +37,7 @@ case "$OS" in
     ;;
 esac
 
-URL="https://github.com/boltdrop/${REPO}/releases/latest/download/${ASSET}"
+URL="https://github.com/${REPO}/releases/latest/download/${ASSET}"
 TMP="$(mktemp -d)"
 
 echo "Downloading BoltDrop for ${OS}/${ARCH}..."
