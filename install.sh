@@ -53,15 +53,15 @@ if [ ! -f "$EXTRACTED" ]; then
   exit 1
 fi
 
-# Strip macOS quarantine (fixes Gatekeeper warning)
-if [ "$OS" = "Darwin" ]; then
-  xattr -dr com.apple.quarantine "$EXTRACTED" 2>/dev/null || true
-fi
-
 chmod +x "$EXTRACTED"
 
 echo "Installing to $INSTALL_DIR/$BIN..."
 sudo mv "$EXTRACTED" "$INSTALL_DIR/$BIN"
+
+# Strip macOS quarantine from final installed path (fixes Gatekeeper blocking the binary)
+if [ "$OS" = "Darwin" ]; then
+  sudo xattr -dr com.apple.quarantine "$INSTALL_DIR/$BIN" 2>/dev/null || true
+fi
 
 rm -rf "$TMP"
 
