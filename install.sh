@@ -9,19 +9,25 @@ BIN="boltdrop"
 OS="$(uname -s)"
 ARCH="$(uname -m)"
 
+# Fetch the latest version tag
+VERSION="$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" | grep '"tag_name"' | sed 's/.*"tag_name": *"v\([^"]*\)".*/\1/')"
+if [ -z "$VERSION" ]; then
+  echo "Error: could not determine latest version"; exit 1
+fi
+
 case "$OS" in
   Darwin)
     case "$ARCH" in
-      arm64)  ASSET="boltdrop-darwin-arm64.tar.gz" ;;
-      x86_64) ASSET="boltdrop-darwin-amd64.tar.gz" ;;
+      arm64)  ASSET="boltdrop_${VERSION}_darwin_arm64.tar.gz" ;;
+      x86_64) ASSET="boltdrop_${VERSION}_darwin_amd64.tar.gz" ;;
       *) echo "Unsupported architecture: $ARCH"; exit 1 ;;
     esac
     ;;
   Linux)
     case "$ARCH" in
-      x86_64)  ASSET="boltdrop-linux-amd64.tar.gz" ;;
-      aarch64) ASSET="boltdrop-linux-arm64.tar.gz" ;;
-      armv7l)  ASSET="boltdrop-linux-armv7.tar.gz" ;;
+      x86_64)  ASSET="boltdrop_${VERSION}_linux_amd64.tar.gz" ;;
+      aarch64) ASSET="boltdrop_${VERSION}_linux_arm64.tar.gz" ;;
+      armv7l)  ASSET="boltdrop_${VERSION}_linux_armv7.tar.gz" ;;
       *) echo "Unsupported architecture: $ARCH"; exit 1 ;;
     esac
     ;;
